@@ -3,10 +3,15 @@
         <SideBarShop />
         <OpenMenuComponent />
         <div id="dashboard-right-panel">
+            
+            <a href="#" @click="this.$store.commit('setShowPanier', !this.$store.state.showPanier)"
+                class="cart-img"><img class="profil-img" src="@/assets/images/cart_icon.svg"
+                    alt="profil page"><span class="badge bg-primary rounded-pill panier-number">{{
+                this.$store.state.nbLivresInPanier }}</span></a>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style="margin: 50px;">
-                <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search"
-                    v-model="recherche">
+                <input type="search" class="form-control" placeholder="Rechercher..."
+                    style="width: fit-content; margin-left: 50px;" aria-label="Search" v-model="recherche">
             </form>
 
             <div class="alert alert-dismissible alert-danger" v-if="errorMsg">
@@ -167,6 +172,17 @@ export default {
     left: 50%;
     top: 2%;
     transform: translateX(-50%);
+}
+.cart-img{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 15px;
+}
+
+.profil-img {
+    width: clamp(35px, 5vw, 55px);
+    object-fit: contain;
 }
 
 .livres-shop {
