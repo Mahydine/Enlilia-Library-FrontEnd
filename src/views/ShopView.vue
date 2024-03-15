@@ -3,10 +3,10 @@
         <SideBarShop />
         <OpenMenuComponent />
         <div id="dashboard-right-panel">
-            
+
             <a href="#" @click="this.$store.commit('setShowPanier', !this.$store.state.showPanier)"
-                class="cart-img"><img class="profil-img" src="@/assets/images/cart_icon.svg"
-                    alt="profil page"><span class="badge bg-primary rounded-pill panier-number">{{
+                class="cart-img"><img class="profil-img" src="@/assets/images/cart_icon.svg" alt="profil page"><span
+                    class="badge bg-primary rounded-pill panier-number">{{
                 this.$store.state.nbLivresInPanier }}</span></a>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style="margin: 50px;">
@@ -174,7 +174,8 @@ export default {
     top: 2%;
     transform: translateX(-50%);
 }
-.cart-img{
+
+.cart-img {
     position: absolute;
     right: 0;
     top: 0;
@@ -246,8 +247,12 @@ export default {
     }
 
     #dashboard-right-panel {
-    margin-left: 0px;
-}
+        margin-left: 0px !important;
+    }
+
+    #dashboard-right-panel {
+        margin-left: 0px;
+    }
 
 }
 </style>
