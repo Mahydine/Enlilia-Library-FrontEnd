@@ -23,6 +23,7 @@
     width: 45px;
     height: 45px;
     cursor: pointer;
+    display: none;
 }
 
 .btn-menu svg {
@@ -32,5 +33,11 @@
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 900px) {
+    .btn-menu {
+        display: block;
+    }
 }
 </style>

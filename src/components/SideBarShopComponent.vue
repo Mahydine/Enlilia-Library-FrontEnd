@@ -1,7 +1,8 @@
 <template>
-    <div class="flex-column flex-shrink-0 p-3 bg-light side-bar" :class="{ 'menu-open': this.$store.state.isMenuOpen }" style="width: 280px;">
+    <div class="flex-column flex-shrink-0 p-3 bg-light side-bar" :class="{ 'menu-open': this.$store.state.isMenuOpen }"
+        style="width: 280px;">
         <button class="btn-close" style="position: absolute; right: 10px; top: 10px;"
-                @click="this.$store.commit('toggleMenu', false);"></button>
+            @click="this.$store.commit('toggleMenu', false);"></button>
         <div class="logo-header" style="display: flex; align-items: flex-end;">
             <router-link to="/"><img class="profil-img" src="@/assets/images/enlilia-logo.png"
                     alt="profil page"></router-link>
@@ -23,14 +24,14 @@
                 <a href="#" @click="this.$store.commit('setShowPanier', !this.$store.state.showPanier)"
                     style="position: relative;"><img class="profil-img" src="@/assets/images/cart_icon.svg"
                         alt="profil page"><span class="badge bg-primary rounded-pill panier-number">{{
-                    this.$store.state.nbLivresInPanier }}</span></a>
+        this.$store.state.nbLivresInPanier }}</span></a>
                 <router-link to="/profil"><img class="profil-img" src="@/assets/images/user_icon.svg"
                         alt="profil page"></router-link>
-            </div>²
+            </div>
         </div>
     </div>
 </template>
-²
+
 <style scoped>
 .side-bar {
     background-color: #f6f6f7 !important;
@@ -66,10 +67,19 @@
     display: flex !important;
 }
 
+.btn-close {
+    display: none;
+}
+
 @media screen and (max-width: 900px) {
     .side-bar {
-        display: none ;
+        display: none;
         z-index: 100;
     }
+
+    .btn-close {
+        display: block;
+    }
+
 }
 </style>
