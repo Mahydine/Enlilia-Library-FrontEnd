@@ -2,12 +2,12 @@
   <NavBar />
   <section id="acceuil">
     <div id="accueil-content">
-      <!-- <img src="@/assets/images/accueil-phone.png" alt="logo_rs_courses" style="scale: 60%;"> -->
-      <div>
+      <img src="@/assets/images/enlilia_dotted_face.webp" alt="enlilia_dotted_face" class="enlilia_dotted_face">
+      <div style="z-index: 0;">
         <h1>broco-lis</h1>
-        <h4>Commandez vos livres</h4>
-        <p>RS Courses, votre partenaire de confiance pour des livraisons qui allient rapidité et qualité. Nous mettons
-          la route au service de votre satisfaction.</p>
+        <h4>Commandez vos livres Facilement</h4>
+        <!-- <p>Enlilia, votre partenaire de confiance pour des livraisons qui allient rapidité et qualité. Nous mettons
+          la route au service de votre satisfaction.</p> -->
         <router-link class="acceuil-btn" to="/boutique">Boutique</router-link>
       </div>
     </div>
@@ -67,10 +67,19 @@ section {
   justify-content: center;
   flex-direction: column;
   position: relative;
-  background: linear-gradient(rgb(255 255 255 / 74%), #ff0076de), url('@/assets/images/index/full-paris-plan.png');
+  background: linear-gradient(#276ecb, #003f91);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.enlilia_dotted_face {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: auto !important;
+  height: 100vh !important;
+  object-fit: cover;
 }
 
 #accueil-content {
@@ -157,5 +166,11 @@ section {
   stroke-miterlimit: 10;
   padding-bottom: 20px;
   animation: jumpInfinite 1.5s infinite;
+}
+
+@media screen and (max-width: 900px) {
+  #acceuil {
+    margin-top: 0;
+  }
 }
 </style>

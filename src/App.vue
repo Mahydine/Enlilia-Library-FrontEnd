@@ -2,7 +2,28 @@
 import { RouterLink, RouterView } from 'vue-router'
 </script>
 
+<script>
+import PanierComponent from "@/components/PanierComponent.vue";
+
+export default {
+  async created() {
+    try {
+      await this.$store.dispatch('checkLoginStatus');
+      await this.$store.dispatch('getPanier');
+      await this.$store.dispatch('getUserData');
+    } catch (error) {
+      console.error("Une erreur est survenue lors de l'initialisation", error);
+    }
+  },
+
+  components: {
+    PanierComponent,
+  },
+}
+</script>
+
 <template>
+  <PanierComponent v-if="this.$store.state.showPanier" />
   <RouterView />
 </template>
 
@@ -39,7 +60,7 @@ body {
 }
 
 .custom-badge {
-  font-size: clamp(9px, 0.7vw , 11px) !important;
+  font-size: clamp(9px, 0.7vw, 11px) !important;
   font-weight: 700;
   color: white;
   display: inline-block;

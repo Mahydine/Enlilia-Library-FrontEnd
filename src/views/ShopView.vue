@@ -1,10 +1,14 @@
 <template>
     <div id="dashboard">
         <SideBarShop />
-
-        <PanierComponent v-if="this.$store.state.showPanier" />
-
+        <OpenMenuComponent />
         <div id="dashboard-right-panel">
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style="margin: 50px;">
+                <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search"
+                    v-model="recherche">
+            </form>
+
             <div class="alert alert-dismissible alert-danger" v-if="errorMsg">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" @click="this.errorMsg = ''"></button>
                 <strong>Erreur : </strong>{{ errorMsg }}
@@ -15,10 +19,11 @@
             </div>
 
             <div class="livres-shop">
-                <div v-for="livre in livres" :key="livre.id" class="card livre-card"
-                    style="width: 18rem; font-size: clamp(5px, 1vw, 12px);">
+                <div v-for="livre in livresFiltres" :key="livre.id" class="card livre-card"
+                    style="max-width: 18rem; font-size: clamp(5px, 1vw, 12px);">
                     <div class="cover-wrapper">
-                        <img :src="livre.couverture" class="card-img-top" :alt="livre.titre">
+                        <router-link :to="{ name: 'LivrePageView', params: { livre_id: livre.id } }"><img
+                                :src="livre.couverture" class="card-img-top" :alt="livre.titre"></router-link>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ livre.titre }}</h5>
@@ -42,14 +47,14 @@
 
 <script>
 import SideBarShop from "@/components/SideBarShopComponent.vue";
-import PanierComponent from "@/components/PanierComponent.vue";
-
+import OpenMenuComponent from "@/components/OpenMenuComponent.vue";
 export default {
     name: "shop",
 
     data() {
         return {
             livres: [],
+            recherche: '',
 
             showPanier: false,
 
@@ -58,14 +63,29 @@ export default {
         };
     },
 
+    mounted() {
+    },
+
     async mounted() {
         this.$store.commit('setShowPanier', false);
         await this.getLivres();
+        await this.$store.dispatch('getPanier');
+        this.$store.dispatch('checkLoginStatus').then(() => {
+            console.log(this.$store.state.isLoggedIn);
+            if (!this.$store.state.isLoggedIn)
+                this.$router.push('/connexion');
+        });
     },
 
     components: {
         SideBarShop,
-        PanierComponent,
+        OpenMenuComponent,
+    },
+
+    computed: {
+        livresFiltres() {
+            return this.livres.filter(livre => livre.titre.toLowerCase().includes(this.recherche.toLowerCase()));
+        }
     },
 
     methods: {
@@ -73,8 +93,6 @@ export default {
             try {
                 const response = await fetch("http://127.0.0.1:8000/livres/", { method: "GET", credentials: 'include', headers: { 'Authorization': `` } });
                 const livres = await response.json();
-
-
 
                 if (Array.isArray(livres)) {
                     this.livres = livres;
@@ -89,12 +107,12 @@ export default {
         async ajouterAuPanier(livre_id) {
             const accessToken = localStorage.getItem('accessToken');
             try {
-                const response = await fetch(`http://127.0.0.1:8000/panier/ajouter/`, { 
-                    method: "POST", 
-                    credentials: 'include', 
-                    headers: { 
+                const response = await fetch(`http://127.0.0.1:8000/panier/ajouter/`, {
+                    method: "POST",
+                    credentials: 'include',
+                    headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${accessToken}` 
+                        'Authorization': `Bearer ${accessToken}`
                     },
                     body: JSON.stringify({
                         livre_id: livre_id
@@ -103,8 +121,12 @@ export default {
 
                 const data = await response.json();
 
+                if (data.successMsg) {
+                    this.successMsg = data.successMsg;
+                    await this.$store.dispatch('getPanier');
+                }
+
                 this.errorMsg = data.errorMsg;
-                this.successMsg = data.successMsg;
 
 
             } catch (error) {
@@ -134,6 +156,15 @@ export default {
     padding: 31px 50px 100px 50px;
     background-color: #f8f8f8;
     overflow: hidden;
+}
+
+.alert {
+    position: fixed;
+    width: 50vw;
+    z-index: 100;
+    left: 50%;
+    top: 2%;
+    transform: translateX(-50%);
 }
 
 .livres-shop {
