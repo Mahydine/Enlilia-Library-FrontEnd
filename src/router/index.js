@@ -1,8 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
-import PanierView from '../views/PanierView.vue'
-import NotFound from '../views/NotFound.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import LoginView from '../views/LoginView.vue';
+import ShopView from '../views/ShopView.vue';
+import NotFound from '../views/NotFound.vue';
+
+// Importez le store Vuex
+import store from '../store';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,15 +21,15 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/panier',
-      name: 'PanierView',
-      component: PanierView
+      path: '/boutique',
+      name: 'ShopView',
+      component: ShopView
     },
     {
       path: '/:catchAll(.*)',
       component: NotFound
     }
   ]
-})
+});
 
-export default router
+export default router;

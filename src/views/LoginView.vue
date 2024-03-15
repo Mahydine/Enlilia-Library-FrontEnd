@@ -1,4 +1,5 @@
 <template>
+    <NavBar />
     <form @submit.prevent="handleSubmit">
         <legend>Connexion</legend>
         <label class="form-label mt-2" for="identifiant">Identifiant :</label>
@@ -17,7 +18,7 @@
 
 
 <script>
-
+import NavBar from "@/components/NavBarComponent.vue";
 export default {
     data() {
         return {
@@ -26,25 +27,15 @@ export default {
             errorMsg: '',
         };
     },
+    components: {
+        NavBar,
+    },
 
     mounted() {
-        this.getLivres();
+        this.$store.commit('setShowPanier', false);
     },
 
     methods: {
-        async getLivres() {
-            try {
-                const response = await fetch("http://127.0.0.1:8000/livres/", { method: "GET", credentials: 'include' });
-                const fournisseurs = await response.json();
-
-                if (Array.isArray(fournisseurs)) {
-                    this.fournisseurs = fournisseurs;
-                }
-
-            } catch (error) {
-                console.error("Erreur d'accès à l'API", error);
-            }
-        },
 
         async handleSubmit() {
 
@@ -62,6 +53,7 @@ export default {
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': ``,
                     },
                     body: JSON.stringify({
                         username: this.username,
@@ -69,18 +61,24 @@ export default {
                     }),
                 });
 
-                const data = await response.json();
 
+                const data = await response.json();
                 if (!response.ok) {
                     this.errorMsg = data.errorMsg || 'Erreur lors de la tentative de connexion :/';
                     throw new Error(this.errorMsg);
                 }
+
+                localStorage.setItem('refreshToken', data.refresh);
+                localStorage.setItem('accessToken', data.access);
+
+                this.$router.push('/');
 
             } catch (error) {
                 throw new Error(this.errorMsg);
             }
 
         },
+
     }
 };
 
