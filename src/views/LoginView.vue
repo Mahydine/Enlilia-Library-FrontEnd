@@ -9,12 +9,12 @@
         <label for="password" class="form-label">Mot de passe :</label>
         <input type="password" id="password" placeholder="Mot de passe" v-model="password" autocomplete="off"
             class="form-control" required><br>
+            {{ errorMsg }}
         <div style="display: flex; justify-content: space-around; align-items: flex-end;">
             <input class="mt-4 btn btn-info text-white" type="submit" value="Se connecter">
             <router-link to="/inscription">S'inscrire</router-link>
         </div>
     </form>
-    {{ errorMsg }}
 </template>
 
 
@@ -39,6 +39,7 @@ export default {
             if (this.$store.state.isLoggedIn)
                 this.$router.push('/');
         });
+        this.$store.commit('toggleMenu', false);
     },
 
     methods: {

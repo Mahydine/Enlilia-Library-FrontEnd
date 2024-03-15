@@ -162,7 +162,7 @@ div a img {
     nav {
         position: absolute;
         height: 100vh;
-        width: 30vw;
+        width: 60vw;
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-around;

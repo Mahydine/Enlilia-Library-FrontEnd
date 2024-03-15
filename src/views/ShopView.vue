@@ -75,6 +75,7 @@ export default {
             if (!this.$store.state.isLoggedIn)
                 this.$router.push('/connexion');
         });
+        this.$store.commit('toggleMenu', false);
     },
 
     components: {
@@ -142,6 +143,7 @@ export default {
 #dashboard {
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 #dashboard-right-panel {

@@ -40,6 +40,7 @@ export default {
 
   mounted() {
     this.$store.commit('setShowPanier', false);
+    this.$store.commit('toggleMenu', false);
   },
 
   methods: {

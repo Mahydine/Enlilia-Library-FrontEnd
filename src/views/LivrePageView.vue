@@ -40,6 +40,7 @@ export default {
         this.livreId = this.$route.params.livre_id;
         await this.getLivreById();
         await this.isAlreadyInPanier();
+        this.$store.commit('toggleMenu', false);
     },
 
     methods: {

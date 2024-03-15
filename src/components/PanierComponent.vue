@@ -8,21 +8,24 @@
         </h4>
         <ul v-if="this.$store.state.nbLivresInPanier > 0" class="list-group mb-3">
             <li v-for="ligne in this.$store.state.panier" :key="ligne.livre.id"
-            class="list-group-item d-flex justify-content-between lh-sm"
-            style="display: flex; align-items: center;">
-            <div style="display: flex;">
-                <img :src="ligne.livre.couverture" class="cart-livre-img" :alt="ligne.livre.titre">
-                <div>
-                    <h6 class="my-0">{{ ligne.livre.titre }}</h6>
-                    <small class="text-body-secondary">{{ ligne.livre.auteur }}</small>
+                class="list-group-item d-flex justify-content-between lh-sm"
+                style="display: flex; align-items: center;">
+                <div style="display: flex;">
+
+
+                    <router-link :to="{ name: 'LivrePageView', params: { livre_id: ligne.livre.id } }"><img
+                            :src="ligne.livre.couverture" class="cart-livre-img" :alt="ligne.livre.titre"></router-link>
+                    <div>
+                        <h6 class="my-0">{{ ligne.livre.titre }}</h6>
+                        <small class="text-body-secondary">{{ ligne.livre.auteur }}</small>
+                    </div>
                 </div>
-            </div>
-            
-            <div style="display: flex; align-items: center;">
-                <span class="text-body-secondary">{{ ligne.livre.prix }}€</span>
-                <img class="delete-icon" src="@/assets/images/delete-icon.svg"
-                @click="deleteFromPanier(ligne.livre.id)" alt="profil page">
-                <span class="badge bg-primary rounded-pill">{{ ligne.quantite }}</span>
+
+                <div style="display: flex; align-items: center;">
+                    <span class="text-body-secondary">{{ ligne.livre.prix }}€</span>
+                    <img class="delete-icon" src="@/assets/images/delete-icon.svg"
+                        @click="deleteFromPanier(ligne.livre.id)" alt="profil page">
+                    <span class="badge bg-primary rounded-pill">{{ ligne.quantite }}</span>
                 </div>
             </li>
         </ul>

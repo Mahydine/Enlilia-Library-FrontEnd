@@ -21,7 +21,7 @@ export default {
     },
 
     mounted() {
-
+        this.$store.commit('toggleMenu', false);
     },
 
     methods: {
