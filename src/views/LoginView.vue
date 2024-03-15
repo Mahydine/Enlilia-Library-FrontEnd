@@ -1,6 +1,6 @@
 <template>
     <NavBar />
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" class="form-log">
         <legend>Connexion</legend>
         <label class="form-label mt-2" for="identifiant">Identifiant :</label>
         <input type="text" id="identifiant" class="form-control" v-model="username"
@@ -9,8 +9,10 @@
         <label for="password" class="form-label">Mot de passe :</label>
         <input type="password" id="password" placeholder="Mot de passe" v-model="password" autocomplete="off"
             class="form-control" required><br>
-
-        <input class="custom-btn mt-4" type="submit" value="Se connecter">
+        <div style="display: flex; justify-content: space-around; align-items: flex-end;">
+            <input class="mt-4 btn btn-info text-white" type="submit" value="Se connecter">
+            <router-link to="/inscription">S'inscrire</router-link>
+        </div>
     </form>
     {{ errorMsg }}
 </template>
@@ -96,3 +98,5 @@ export default {
 };
 
 </script>
+
+<style scoped></style>

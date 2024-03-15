@@ -73,6 +73,16 @@ body {
   width: 100%;
 }
 
+.form-log{
+  width: clamp(150px, 80vw, 500px);
+  border: 1px solid rgb(230, 230, 230);
+  background-color: #fff;
+  padding: 20px;
+  margin: auto;
+  border-radius: 9px;
+  margin-top: 150px;
+}
+
 @font-face {
   font-display: swap;
   font-family: GTWalsheimPro;

@@ -179,10 +179,13 @@ div a img {
         margin-top: 30px;
         margin-bottom: 10px;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .second-part-a a {
         margin-bottom: 10px;
+        text-align: center;
     }
 
     .first-part-nav {
