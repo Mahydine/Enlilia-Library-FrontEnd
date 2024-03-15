@@ -38,6 +38,7 @@
     height: 100vh;
     position: sticky;
     top: 0;
+    display: flex;
 }
 
 .bottom-sidebar {
