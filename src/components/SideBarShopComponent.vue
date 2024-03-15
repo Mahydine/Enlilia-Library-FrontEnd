@@ -38,7 +38,6 @@
     height: 100vh;
     position: sticky;
     top: 0;
-    display: flex;
 }
 
 .bottom-sidebar {
@@ -77,7 +76,6 @@
         display: none;
         z-index: 100;
     }
-
     .btn-close {
         display: block;
     }

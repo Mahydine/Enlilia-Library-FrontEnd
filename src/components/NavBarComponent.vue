@@ -78,6 +78,7 @@ nav {
     padding: 0 5%;
     /* box-shadow: 0 1px 158px rgb(255 0 129 / 10%); */
     border-bottom: 1px solid #ed5ca521;
+    filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0, 0));
 }
 
 nav div {
@@ -168,6 +169,7 @@ div a img {
         justify-content: space-around;
         transition: 0.2s ease-in-out;
         left: -100%;
+        filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0, 0.1));
     }
 
     .first-part-nav a {

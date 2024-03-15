@@ -155,6 +155,7 @@ export default {
     display: flex;
     flex-direction: column;
     flex: 3;
+    margin-left: 280px;
 }
 
 #dashboard-component {
@@ -243,5 +244,10 @@ export default {
         top: -100%;
         z-index: 2;
     }
+
+    #dashboard-right-panel {
+    margin-left: 0px;
+}
+
 }
 </style>
